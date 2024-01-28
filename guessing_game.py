@@ -76,27 +76,40 @@ def start_game():
         print("You got it {}! Congratulations!".format(name))
         print("It only took you {} guesses to get it right!".format(guesses))
 
-      # Display a Game Over message along with an invitation to play again
+      # Display a Game Over message
       print("\n***********************")
       print("It is game over for now.")
+
+      # Invite the player to play again:
       while True:
+        # Check to see if the player beat the current_high_score and update as needed
         if guesses < current_high_score:
           current_high_score = guesses
-        user_choice = input("Would you like to play again?  (Y/N)   ")
-        if user_choice.lower() == "n":
-          game_over = True
-          break
-        elif user_choice.lower() == "y":
-          print("\n\nLet's play again!")
-          print("The current high score for guesses is ", current_high_score)
-          answer = generate_random_number()
-          print("The new number is ", answer)
-          guesses = 0
-          break
-        else:
-          continue
 
-  # Once a user selects to end the game, display the goodbye message and end the game
+        # Prompt the player to choose whether they want to play again:
+        try:
+          user_choice = input("Would you like to play again?  (Y/N)   ")
+          if user_choice != "Y" and user_choice != "N":
+            raise ValueError("Invalid input. Please enter Y or N.")
+        except ValueError as e:
+          print(e)
+        else:
+          # If they select "N", break out of the while loop to print the goodbye message
+          if user_choice.lower() == "n":
+            game_over = True
+            break
+  
+          # If they select "Y", display a next game message, display the current high score,
+          # generate a new random number, and reset the guesses variable
+          elif user_choice.lower() == "y":
+            print("\n\nLet's play again!")
+            print("The current high score for guesses is ", current_high_score)
+            answer = generate_random_number()
+            print("The new number is ", answer)
+            guesses = 0
+            break
+
+  # Once a user selects to end the game, display the goodbye message and end the game:
   print("\n\n***********************")
   print("Thank you for playing the Number Guessing Game!")
   print("Your best score for guesses was", current_high_score)

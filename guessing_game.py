@@ -71,14 +71,12 @@ def start_game():
 
       # If the guess is correct, display a congratulations message
       # that includes the number of guesses it took to get the right answer.
-      # Once the guess is correct, stop looping, inform the user they "Got it"
-      # and show how many attempts it took them to get the correct number.
       elif current_guess == answer:
         print("\n***********************")
         print("You got it {}! Congratulations!".format(name))
         print("It only took you {} guesses to get it right!".format(guesses))
 
-      # Let the player know the game is ending, or something that indicates game over.
+      # Display a Game Over message along with an invitation to play again
       print("\n***********************")
       print("It is game over for now.")
       while True:
@@ -95,12 +93,14 @@ def start_game():
           print("The new number is ", answer)
           guesses = 0
           break
+        else:
+          continue
 
+  # Once a user selects to end the game, display the goodbye message and end the game
   print("\n\n***********************")
   print("Thank you for playing the Number Guessing Game!")
   print("Your best score for guesses was", current_high_score)
   print("See you soon! Have a great day!")
-
 
 # Kick off the program by calling the start_game function.
 start_game()
